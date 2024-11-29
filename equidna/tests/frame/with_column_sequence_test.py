@@ -13,6 +13,7 @@ data = {
     "ab": ["foo", "bars"],
 }
 
+
 @pytest.mark.xfail
 def test_with_columns() -> None:
     result = (

@@ -21,6 +21,3 @@ def test_to_dict_as_series() -> None:
     assert isinstance(result["c"], pd.Series)
 
     assert all(result[k].to_list() == v for k, v in data.items())
-
-
-

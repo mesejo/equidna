@@ -3,6 +3,7 @@ from typing import Any
 import pandas as pd
 import pandas.testing as tm
 
+
 def assert_frame_equal(
     left: pd.DataFrame, right: pd.DataFrame, *args: Any, **kwargs: Any
 ) -> None:

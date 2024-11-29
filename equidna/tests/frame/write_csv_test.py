@@ -14,4 +14,3 @@ def test_write_csv(tmpdir: pytest.TempdirFactory) -> None:
     result = DataFrame(data).write_csv(str(path))
     assert path.exists()
     assert result is None
-

@@ -50,13 +50,14 @@ def test_unpivot_var_value_names(
     variable_name: str | None,
     value_name: str | None,
 ) -> None:
-    #FIXME problem with empty string as column names
+    # FIXME problem with empty string as column names
     df = DataFrame(data)
     result = df.unpivot(
         on=["b", "c"], index=["a"], variable_name=variable_name, value_name=value_name
     ).collect()
 
     assert list(result.columns)[-2:] == [variable_name, value_name]
+
 
 def test_unpivot_default_var_value_names() -> None:
     df = DataFrame(data)
