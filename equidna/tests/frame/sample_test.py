@@ -4,6 +4,7 @@ import pytest
 
 from equidna.dataframe import DataFrame
 
+
 @pytest.mark.xfail
 def test_sample_fraction() -> None:
     df = DataFrame({"a": [1, 2, 3, 4], "b": ["x", "y", "x", "y"]})

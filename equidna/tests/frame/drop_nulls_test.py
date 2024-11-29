@@ -14,10 +14,12 @@ data = {
 
 def test_drop_nulls():
     result = DataFrame(data).drop_nulls().collect()
-    expected = pd.DataFrame({
-        "a": [2.0, 4.0],
-        "b": [3.0, 5.0],
-    })
+    expected = pd.DataFrame(
+        {
+            "a": [2.0, 4.0],
+            "b": [3.0, 5.0],
+        }
+    )
 
     assert_frame_equal(result, expected)
 

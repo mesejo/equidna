@@ -9,6 +9,7 @@ import ibis.selectors as s
 
 CON = ibis.duckdb.connect()
 
+
 def col(name):
     return getattr(_, name)
 
@@ -16,9 +17,9 @@ def col(name):
 def lit(val, dtype=None):
     return literal(val, type=dtype)
 
-class DataFrame:
 
-    def __init__(self, data, expr = None):
+class DataFrame:
+    def __init__(self, data, expr=None):
         if isinstance(data, dict):
             data = pd.DataFrame(data)
 
@@ -46,7 +47,10 @@ class DataFrame:
         self.expr = self.expr.mutate(*exprs, **named_exprs)
         return self
 
-    def drop_nulls(self, subset: Sequence[str] | str | None = None,):
+    def drop_nulls(
+        self,
+        subset: Sequence[str] | str | None = None,
+    ):
         self.expr = self.expr.drop_null(subset=subset)
         return self
 
@@ -64,8 +68,7 @@ class DataFrame:
     def write_parquet(self, path):
         return self.expr.to_parquet(path)
 
-    def unpivot(self, on, index, variable_name = "variable", value_name = "value"):
-
+    def unpivot(self, on, index, variable_name="variable", value_name="value"):
         if isinstance(on, list):
             on = s.cols(*on)
 
@@ -77,21 +80,32 @@ class DataFrame:
         if on is None:
             on = ~s.cols(*index) if isinstance(index, list) else ~s.cols(index)
 
-        self.expr = self.expr.pivot_longer(on, names_to=variable_name, values_to=value_name).drop(~s.cols(*keep))
+        self.expr = self.expr.pivot_longer(
+            on, names_to=variable_name, values_to=value_name
+        ).drop(~s.cols(*keep))
         return self
 
     def sort(self, *fields, descending=False):
-
         if isinstance(descending, list):
-            fields = [desc(field) if direction else asc(field) for field, direction in zip(fields, descending)]
+            fields = [
+                desc(field) if direction else asc(field)
+                for field, direction in zip(fields, descending)
+            ]
         else:
             fields = [desc(field) if descending else asc(field) for field in fields]
 
         self.expr = self.expr.order_by(*fields)
         return self
 
-    def join(self, df_right, on = None, left_on = None, right_on = None, how = "inner", suffix = "_right"):
-
+    def join(
+        self,
+        df_right,
+        on=None,
+        left_on=None,
+        right_on=None,
+        how="inner",
+        suffix="_right",
+    ):
         if on is not None:
             if not isinstance(on, list):
                 on = [on]
@@ -107,9 +121,24 @@ class DataFrame:
         else:
             predicates = ()
 
-        return DataFrame(None, expr=self.expr.join(df_right.expr, predicates, how=how, rname=f"{{name}}{suffix}"))
+        return DataFrame(
+            None,
+            expr=self.expr.join(
+                df_right.expr, predicates, how=how, rname=f"{{name}}{suffix}"
+            ),
+        )
 
-    def join_asof(self, df_right, on = None, left_on = None, right_on = None, by = None, by_left = None, by_right = None, strategy="backward"):
+    def join_asof(
+        self,
+        df_right,
+        on=None,
+        left_on=None,
+        right_on=None,
+        by=None,
+        by_left=None,
+        by_right=None,
+        strategy="backward",
+    ):
         import operator as op
 
         if on is not None:
@@ -141,7 +170,9 @@ class DataFrame:
         else:
             predicates = ()
 
-        return DataFrame(None, expr=self.expr.asof_join(df_right.expr, on=on, predicates=predicates))
+        return DataFrame(
+            None, expr=self.expr.asof_join(df_right.expr, on=on, predicates=predicates)
+        )
 
     def write_csv(self, path):
         return self.expr.to_csv(path)
@@ -166,8 +197,7 @@ class DataFrame:
         return len(self.expr.execute()) == 0
 
     def rename(self, method):
-
         if isinstance(method, dict):
-            method = {v : k for k, v in method.items()}
+            method = {v: k for k, v in method.items()}
 
         return DataFrame(None, expr=self.expr.rename(method))

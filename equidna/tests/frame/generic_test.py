@@ -3,6 +3,7 @@ from equidna.tests.frame.util import assert_frame_equal
 
 import polars as pl
 
+
 def test_select(data):
     df = DataFrame(data)
 
@@ -11,13 +12,17 @@ def test_select(data):
 
     assert_frame_equal(actual, expected)
 
+
 def test_select_transform(data):
     df = DataFrame(data)
 
-    actual = df.select(bmi= col("weight") / (col("height") * col("height"))).collect()
-    expected = data.select(bmi= pl.col("weight") / (pl.col("height") * pl.col("height"))).to_pandas()
+    actual = df.select(bmi=col("weight") / (col("height") * col("height"))).collect()
+    expected = data.select(
+        bmi=pl.col("weight") / (pl.col("height") * pl.col("height"))
+    ).to_pandas()
 
     assert_frame_equal(actual, expected)
+
 
 def test_head(data):
     df = DataFrame(data)

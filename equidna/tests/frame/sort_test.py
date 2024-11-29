@@ -12,18 +12,22 @@ def test_sort() -> None:
     data = {"a": [1, 3, 2], "b": [4, 4, 6], "z": [7.0, 8, 9]}
     df = DataFrame(data)
     result = df.sort("a", "b").collect()
-    expected = pd.DataFrame({
-        "a": [1, 2, 3],
-        "b": [4, 6, 4],
-        "z": [7.0, 9.0, 8.0],
-    })
+    expected = pd.DataFrame(
+        {
+            "a": [1, 2, 3],
+            "b": [4, 6, 4],
+            "z": [7.0, 9.0, 8.0],
+        }
+    )
     assert_frame_equal(result, expected)
     result = df.sort("a", "b", descending=[True, False]).collect()
-    expected = pd.DataFrame({
-        "a": [3, 2, 1],
-        "b": [4, 6, 4],
-        "z": [8.0, 9.0, 7.0],
-    })
+    expected = pd.DataFrame(
+        {
+            "a": [3, 2, 1],
+            "b": [4, 6, 4],
+            "z": [8.0, 9.0, 7.0],
+        }
+    )
     assert_frame_equal(result, expected)
 
 

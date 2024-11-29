@@ -5,8 +5,9 @@ import pytest
 from equidna.dataframe import DataFrame
 
 
-#FIXME add checks for exceptions
-#FIXME verify that list can be passed the same as narwhals
+# FIXME add checks for exceptions
+# FIXME verify that list can be passed the same as narwhals
+
 
 @pytest.mark.parametrize(
     ("to_drop", "expected"),
