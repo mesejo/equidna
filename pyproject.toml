@@ -1,0 +1,17 @@
+[project]
+name = "equidna"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "duckdb>=1.1.3",
+    "ibis-framework[duckdb]>=9.5.0",
+    "pyarrow>=17.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "polars>=1.15.0",
+    "pytest>=8.3.3",
+]
