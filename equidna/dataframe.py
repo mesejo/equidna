@@ -3,7 +3,7 @@ from typing import Sequence
 import ibis
 import pandas as pd
 
-from ibis import _
+from ibis import _, literal, desc, asc
 
 import ibis.selectors as s
 
@@ -13,6 +13,8 @@ def col(name):
     return getattr(_, name)
 
 
+def lit(val, dtype=None):
+    return literal(val, type=dtype)
 
 class DataFrame:
 
@@ -78,7 +80,13 @@ class DataFrame:
         self.expr = self.expr.pivot_longer(on, names_to=variable_name, values_to=value_name).drop(~s.cols(*keep))
         return self
 
-    def sort(self, *fields):
+    def sort(self, *fields, descending=False):
+
+        if isinstance(descending, list):
+            fields = [desc(field) if direction else asc(field) for field, direction in zip(fields, descending)]
+        else:
+            fields = [desc(field) if descending else asc(field) for field in fields]
+
         self.expr = self.expr.order_by(*fields)
         return self
 
@@ -153,3 +161,13 @@ class DataFrame:
 
     def pipe(self, fun):
         return fun(self)
+
+    def is_empty(self):
+        return len(self.expr.execute()) == 0
+
+    def rename(self, method):
+
+        if isinstance(method, dict):
+            method = {v : k for k, v in method.items()}
+
+        return DataFrame(None, expr=self.expr.rename(method))

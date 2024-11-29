@@ -2,7 +2,7 @@ import pandas as pd
 import pytest
 
 from equidna.dataframe import DataFrame
-from equidna.tests.util import assert_frame_equal
+from equidna.tests.frame.util import assert_frame_equal
 
 data = {"a": list(range(10))}
 

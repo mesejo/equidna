@@ -3,7 +3,7 @@ from __future__ import annotations
 import pandas as pd
 
 from equidna.dataframe import DataFrame
-from equidna.tests.util import assert_frame_equal
+from equidna.tests.frame.util import assert_frame_equal
 
 data = {
     "a": ["foo", "bars"],

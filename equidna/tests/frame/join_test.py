@@ -1,15 +1,13 @@
 from __future__ import annotations
 
 import re
-from datetime import datetime
 from typing import Any
-from typing import Literal
 
 import pandas as pd
 import pytest
 
 from equidna.dataframe import DataFrame, col
-from equidna.tests.util import assert_frame_equal
+from equidna.tests.frame.util import assert_frame_equal
 
 
 def test_inner_join_two_keys() -> None:

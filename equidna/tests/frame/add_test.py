@@ -1,7 +1,7 @@
 import pandas as pd
 
 from equidna.dataframe import col, DataFrame
-from equidna.tests.util import assert_frame_equal
+from equidna.tests.frame.util import assert_frame_equal
 
 
 def test_add():

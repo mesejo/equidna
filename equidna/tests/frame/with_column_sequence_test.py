@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 
 from equidna.dataframe import DataFrame, col
-from equidna.tests.util import assert_frame_equal
+from equidna.tests.frame.util import assert_frame_equal
 
 data = {
     "a": ["foo", "bars"],
