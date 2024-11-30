@@ -3,7 +3,7 @@ from __future__ import annotations
 import pandas as pd
 
 from equidna.dataframe import DataFrame
-from equidna.tests.frame.util import assert_frame_equal
+from tests.frame.util import assert_frame_equal
 
 
 def test_rename() -> None:

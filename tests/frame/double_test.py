@@ -4,7 +4,7 @@ import pandas as pd
 
 from equidna.dataframe import DataFrame, col
 from equidna.selectors import all
-from equidna.tests.frame.util import assert_frame_equal
+from tests.frame.util import assert_frame_equal
 
 
 def test_all():

@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 
 from equidna.dataframe import DataFrame, lit
-from equidna.tests.frame.util import assert_frame_equal
+from tests.frame.util import assert_frame_equal
 
 
 @pytest.mark.parametrize(

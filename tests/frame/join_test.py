@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 
 from equidna.dataframe import DataFrame, col
-from equidna.tests.frame.util import assert_frame_equal
+from tests.frame.util import assert_frame_equal
 
 
 def test_inner_join_two_keys() -> None:
