@@ -4,7 +4,7 @@ import pandas as pd
 import pytest
 
 from equidna.dataframe import DataFrame
-from equidna.tests.frame.util import assert_frame_equal
+from tests.frame.util import assert_frame_equal
 
 data = {"a": [1, 3, 2], "b": [4, 4, 6], "z": [7.0, 8, 9]}
 
